@@ -20,18 +20,31 @@ function Footer() {
                     <div className="span_dicas_texto">
                         <p>Temos algumas dicas para o seu serviço ou freela ser um sucesso, acesse nossa página de
                             recomendações para saber mais.</p>
-                        <Link className="botao botao_dicas" to={"#"}>mais dicas</Link>   
+                        <Link className="botao botao_dicas" to={"#"}>mais dicas</Link>
                     </div>
                 </div>
                 <div className="rodape_conteudo">
                     <div className="rodape_conteudo_paginas">
                         <h2>Páginas</h2>
                         <ul>
-                            <Link to={"#"}><li>Login</li></Link>
-                            <li>Home</li>
-                            <li>Listar Serviços</li>
-                            <li>Cadastrar Cliente</li>
-                            <li>Cadastrar Desenvolvedor</li>
+                            <li>
+                                <Link to={"#"}>Login</Link>
+                            </li>
+                            <li>
+                                <Link to={"#"}> Home</Link>
+                            </li>
+                            <li>
+                                <Link to={"#"}> Listar Serviços</Link>
+                            </li>
+                            <li>
+                                <Link to="lista/devs">Lista Desenvolvedores</Link>
+                            </li>
+                            <li>
+                                <Link to={"#"}>Cadastrar Cliente</Link>
+                            </li>
+                            <li>
+                                <Link to={"#"}>Cadastrar Desenvolvedor</Link>
+                            </li>
                         </ul>
                     </div>
                     <img src={imgLogo} alt="" />

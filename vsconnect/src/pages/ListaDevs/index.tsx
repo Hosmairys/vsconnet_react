@@ -5,45 +5,20 @@ import "./style.css";
 import CardDev from "../../components/CardDev";
 
 //Hoots
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import api from "../../utils/api";
 
 function ListaDevs() {
-
-    const [devs, setDev] = useState<any[]>([
-        {
-            img_perfil: "https://github.com/Thiago-Nascimento.png",
-            nome: "Thiago Nascimento",
-            email: "thiago@email.com",
-            skills: ["HTML", "CSS", "REACT"]
-        },
-        {
-            img_perfil: "https://github.com/JessicaSanto.png",
-            nome: "Jessica Franzon",
-            email: "jessica@email.com",
-            skills: ["HTML", "CSS", "REACT"]
-        },
-        {
-            img_perfil: "https://github.com/odirlei-assis.png",
-            nome: "Odirlei Sabella",
-            email: "odirlei@email.com",
-            skills: ["HTML", "CSS", "REACT"]
-        },
-        {
-            img_perfil: "https://github.com/alexiamelhado18.png",
-            nome: "Aléxia Vitória",
-            email: "alexia@email.com",
-            skills: ["PYTHON", "VUE", "REACT"]
-        }
-    ])
-
-    const [listaDevsFiltrados, setListaDevsFiltrados] = useState<any[]>(devs);
+    //STATE DEVS
+    const [devs, setDevs] = useState<any[]>([])
 
     const [skillDigitado, setSkillDigitado] = useState<string>("");
 
     //função onde pega o que o usuario digitou
     function verificarCampoSkill(event: any) {
         if (event.target.value === "") {
-            setListaDevsFiltrados(devs);
+            listarDesenvolvedores();
         }
         setSkillDigitado(event.target.value);
     }
@@ -59,8 +34,26 @@ function ListaDevs() {
             alert("Nenhum desenvolvedor(a) com essa skill :(")
         } else {
             //atribui valor de devs filtrado, ao state ListaDevsFiltrados 
-            setListaDevsFiltrados(devsFiltrados);
+            setDevs(devsFiltrados);
         }
+    }
+
+    function listarDesenvolvedores() {
+        api.get("users")   
+            .then((response: any) => {
+                console.log(response);
+                setDevs(response.data)
+            })
+            .catch((error: any) => {
+                console.log("Error ao realizar um requisição:", error);
+                
+            })
+    }
+
+    useEffect(() => {
+        //executa
+        listarDesenvolvedores();
+    }, [])
 
     return (
         <>
@@ -69,7 +62,7 @@ function ListaDevs() {
                     <div className="lista_devs_conteudo">
                         <h1>Lista de Devs</h1>
                         <hr />
-                        <form method="post">
+                        <form method="post" onSubmit={buscarDevPorSkill}>
                             <div className="wrapper_form">
                                 <label htmlFor="busca">Procurar desenvolvedores</label>
                                 <div className="campo-label">
@@ -78,8 +71,8 @@ function ListaDevs() {
                                         name="campo-busca"
                                         id="busca"
                                         placeholder="Buscar desenvolvedores por tecnologias..."
-                                        autoCapitalize="off"
-                                        onChange={virificarCamposSkill}
+                                        autoComplete="off"
+                                        onChange={verificarCampoSkill}
                                     />
                                     <button type="submit">Buscar</button>
                                 </div>
@@ -91,10 +84,11 @@ function ListaDevs() {
                                     devs.map((dev: any, indice: number) => {
                                         return <li key={indice}>
                                             <CardDev
-                                                foto={dev.img_perfil}
+                                                id={dev.id}
+                                                foto={dev.user_img}
                                                 nome={dev.nome}
                                                 email={dev.email}
-                                                listaTechs={dev.skills}
+                                                listaTechs={dev.hardSkills}
                                             />
                                         </li>
                                     })

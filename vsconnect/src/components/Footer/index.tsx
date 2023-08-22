@@ -34,7 +34,7 @@ function Footer() {
                                 <Link to={"#"}> Home</Link>
                             </li>
                             <li>
-                                <Link to={"#"}> Listar Serviços</Link>
+                                <Link to={"/lista/serv"}> Listar Serviços</Link>
                             </li>
                             <li>
                                 <Link to="lista/devs">Lista Desenvolvedores</Link>

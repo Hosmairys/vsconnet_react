@@ -5,8 +5,10 @@ import ReactDOM from 'react-dom/client';
 import Home from "./pages/Home/";
 import ListaServicos from "./pages/ListaServicos/";
 import ListaDevs from './pages/ListaDevs';
+import Perfil from "./pages/PerfilUsuario";
 import Footer from './components/Footer';
 import Header from './components/Header';
+import VisualizarServico from './pages/VisualizarServico';
 
 //estilização global
 import "./index.css";
@@ -22,10 +24,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <Header />
       <Routes> {/*indica uma lista de rotas*/}
         <Route path='/' element={<Home />} /> {/*indica o caminho do componente e o nome da rotadele*/}
-        <Route path='/' element={<ListaServicos />} />
+        <Route path='/lista/serv' element={<ListaServicos />} />
         <Route path='lista/devs' element={<ListaDevs/>} />
+        <Route path='/perfil/:idUsuario' element={<Perfil/>}/> {/*Rota com parametro, indicando o indicardor do desenvolvedor*/}
+        <Route path='/visualizar/servicos/:idservicos' element={<VisualizarServico/>}/>
       </Routes>
-      <Home />
       <Footer />
       {/* <ListaServicos /> */}
     </BrowserRouter>

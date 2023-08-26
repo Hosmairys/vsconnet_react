@@ -44,7 +44,7 @@ function VisualizarServico() {
                 <div className="servico">
                     <div className="topo_servico">
                         <h2>{titulo}</h2>
-                        <span>R$ {proposta} </span>
+                        <span>R${proposta} </span>
                     </div>
                     <p>{descricao}</p>
                     <div className="techs">
